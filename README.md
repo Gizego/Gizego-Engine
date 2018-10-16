@@ -4,6 +4,7 @@
   The engine uses OpenGL for graphics but support for a custom CPU pixel engine is predicted. OpenAL is used for audio and GLFW for context creation. TrueType support is being added for the GCC compiler, due to problems with compiling the freetype library.
   
   List of utilities:
+  
     - Support for loading text files handling BOM headers;
     - Random number Generator;
     - Timers and Stopwatches;
