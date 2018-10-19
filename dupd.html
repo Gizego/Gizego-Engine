@@ -9,13 +9,13 @@
 	<head>
 	<div class="etitle">
 	Development updates
-	</div>
+	</div> 
 	<div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
 	What was recently added and future projects
 	</div>
 	</head>
 	
-	<br></br>
+	<br />
 	
 	<body style="font-family:arial; font-size:14px;">
 		<div style="font-family:arial; font-size:18px; font-weight: bold;">
@@ -23,19 +23,32 @@
 		</div>
 		<ul>
 		
-		<li>Support for font loading in GCC. The FreeType library comes compiled for MSVC. That kind of library can be imported to MinGW
+		<li>
+		Support for font loading in GCC. The FreeType library comes compiled for MSVC. That kind of library can be imported to MinGW
 		but it's not guarranteed it's going to work. In my case, it didn't. I tried to build it myself but Makefiles just refused to work and
 		I am currently porting the FreeType code to stb_truetype.h, a free public domain single header library.</li>
 		<br />
-		<li>
+		<li>		
 		Lots of UI elements, from text boxes to radio buttons.
-		</li>
-		<br />
+		</li>	
+		<br />		
 		<li>
 		Geometry regular polygon generator. It's so buggy I don't even know what to do. The polygon outline vertices are generated
-		but I am trying to convert those outline vertices to triangles that can be rendered with OpenGL and that's being a problem.
+		but I am trying to convert those outline vertices to triangles that can be rendered with OpenGL but that's being a problem.		
 		</li>
+		<br />		
 		</ul>
 		<br />
+		<div style="font-family:arial; font-size:18px; font-weight: bold;">
+		Future additions:
+		</div>
+		<br />
+		<ul>
+		<li>
+		A costum pixel engine. If your computer doesn't support OpenGL 3.0 I'll be adding a tool that allows the CPU to
+		draw the graphics and then load the pixels to the GPU over OpenGL 1.0. It won't be fast and you might not get over 30FPS
+		but the game will at least work.
+		</li>
+		</ul>
 	</body>
 </html>
