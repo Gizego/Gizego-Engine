@@ -1,0 +1,55 @@
+<html>
+
+<style>
+div.etitle {font-family:arial; font-size:30px; font-weight: bold; text-align: center; background-color: rgb(255, 0, 255); }
+</style>
+
+<title>Engine86</title>	
+	<head>
+	<div class="etitle">
+	Compiling the Library
+	</div>
+	<div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
+	This is different for every platform
+	</div>
+	</head>
+
+<body>
+<br />
+<h1 style="font-family:arial; font-size:14px; font-weight: normal;">
+	<div style="font-family:arial; font-size:18px; font-weight: bold;">
+	Windows MinGW:
+	</div>
+	<br />
+	The engine was made for GCC. With MinGW you should get everything you need.
+	<br />
+	The libraries in the "dependencies" folder were compiled for windows so you won't have to build any dependency.
+	<br />
+	The build32.bat and build64.bat files should be slightly altered to match your MinGW/bin folder.
+	<br />
+	<br />
+	<br />
+	<div style="font-family:arial; font-size:18px; font-weight: bold;">
+	Visual Studio on Windows:
+	</div>
+	<br />
+	This is untested but you may have to rebuild GLEW and GLFW to MSVC libraries and get them on the "dependencies" folder.
+	<br />
+	Don't forget to change the suffix of the libraries to ".a" even when they are MSVC lib files.
+	<br />
+	Make a solution file and statically link the libraries in the "dependencies folder" for your targeted CPU architecture.
+	<br />
+	<br />
+	<br />
+	<div style="font-family:arial; font-size:18px; font-weight: bold;">
+	Linux and Mac GCC:
+	</div>
+	<br />
+	In this case, you'll have to rebuild all the libraries for your platform.
+	<br />
+	You'll extract some important information from the BAT file. It won't work directly on your platfrom but it shows you what you should do with GCC.
+	<br />
+	Don't forget to change the path of the libraries and remove the -lgdi32 dependency.
+	</h1>
+</body>
+</html>
