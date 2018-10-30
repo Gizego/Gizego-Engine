@@ -26,6 +26,14 @@
 		Support for TrueType font loading. The FreeType library wasn't working on GCC and I was unable to build it by myself.
 		Now, I got it replaced by stb_truetype.
 		</li>
+		<br />		
+		<li>
+		Regular polygon generator in the GeometryMesh class.
+		</li>
+		<br />
+		<li>
+		2-dimensional scale.
+		</li>
 		</ul>
 		<div style="font-family:arial; font-size:18px; font-weight: bold;">
 		Beeing added:
@@ -33,39 +41,26 @@
 		<ul>
 		<li>		
 		Lots of UI elements, from text boxes to radio buttons.
-		</li>	
-		<br />		
-		<li>
-		Geometry regular polygon generator. It's so buggy I don't even know what to do. The polygon outline vertices are generated
-		but I am trying to convert those outline vertices to triangles that can be rendered with OpenGL but that's being a problem.		
-		</li>	
+		</li>				
 		</ul>
-		<br />
+		
 		<div style="font-family:arial; font-size:18px; font-weight: bold;">
 		Future additions:
 		</div>
-		<br />
 		<ul>
 		<li>
-		Support for bitmap fonts.
+		Optimization. I'll be reviewing some old code to improve the engine performance.
 		</li>
 		<br />
 		<li>
-		Element rotation and 2-dimensional scale.
-		</li>
+		Support for bitmap fonts.
+		</li>		
 		<br />
 		<li>
 		A costum pixel engine. If your computer doesn't support OpenGL 3.0 I'll be adding a tool that allows the CPU to
 		draw the graphics and then load the pixels to the GPU over OpenGL 1.0. It won't be fast and you might not get over 30FPS
 		but the game will at least work.
-		</li>
-		<br />
-		<li>
-		Pre-rendered CPU geometry. OpenGL is in trouble rendering the triangles from the regular polygon vertices system.
-		I want to render the geometry using the CPU and send the result as a texture to OpenGL.
-		The process of creating new Geometry meshes will be slower but rendering performance isn't going to be afected by much 
-		because the CPU only renders the mesh when it's created. While rendering we only need some shader magic. 
-		</li>
+		</li>		
 		</ul>
 	</body>
 </html>
