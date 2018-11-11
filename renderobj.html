@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<style>
+    div.etitle {
+        font-family: arial;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        background-color: rgb(255, 0, 255);
+    }
+
+    span {
+        font-family:consolas;
+        font-size:14px;
+        font-weight: normal;
+        background-color: rgb(200, 200, 200);
+    }
+</style>
+
+<title>Gizego Engine</title>
+<head>
+    <div class="etitle">
+        Documentation
+    </div>
+    <div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
+        Rendering objects
+    </div>
+</head>
+<br />
+<body style="font-family:arial; font-size:14px; font-weight: normal;">
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Image:
+    </div>
+    <br />
+    The
+    <span>
+        GizegoEngine::Image
+    </span>&ensp;
+    class allows you to load images from files and draw pixel by pixel. Create an image loading it from a file after you create the window.<br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::Image* image = new GizegoEngine::Image(L"filepath.png");
+    </div>
+    Don't forget to delete the image when you don't need it anymore.
+    <br /><br />
+    Now, you can use <span>image->SetPixel()</span>, <span>image->GetPixel()</span> and <span>image->Fill()</span> to set and get pixels on the image.
+    <br />
+    After the next step, these operations will crash your program.
+    <br /><br />
+    Now, we must convert our image to a texture:
+    <br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">image->Finalize();</div>
+    <br /><br />
+    In our game loop, between updating the window and swapping the buffers, we call:
+    <br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        renderer->Render(image, GizegoEngine::vec2(x, y)), GizegoEngine::vecf(1, 1), Gizego::Color(255, 255, 255));
+    </div><br />
+    x and y should be replaced by the coordinates where you want to render your image.<br />
+    The vecf scale parameter is optional.<br />
+    The color parameter is also optional and its constructor can use 4 integers from 0 to 255 (RGBA8).
+    <br /><br />
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Geometry Mesh:
+    </div>
+    <br />
+    This class allows you to draw custom geometry. It also contains a regular polygon generator, int the case you need it.<br />
+    You can create it from an <span>std::vector&lt;float&gt;</span> or from an number of sides n and radius(in pixels) r.<br />
+    <span>GizegoEngine::GeometryMesh* geo = new GizegoEngine::GeometryMesh(512, 50);</span>&emsp;A polygon with 512 sides(looks like a circle) and 50 pixels of radius.<br />Do not forget to delete the result.<br />
+    Do not forget to only call this after the window creation.<br /><br />
+    In your game loop use the next function to render it:<br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        renderer->Render(geo, GizegoEngine::Color(255, 255, 255), GizegoEngine::GeometryRenderingMode::FillTriangles, GizegoEngine::vec2(x, y), GizegoEngine::vecf(1, 1));
+    </div>
+    x and y should be replaced by the coordinates where you want to render your mesh.<br />
+    The vecf scale parameter is optional.<br />
+    Every regular polygon must be rendered with GizegoEngine::GeometryRenderingMode::FillTriangles.
+    <br /><br />
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Fonts:
+    </div>
+    <br />
+    A TrueType font. Can be used to render text.<br />
+    You can call its constructor after the window creation.
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        unsigned int fontsize = 32;<br />
+        GizegoEngine::Font* font = new GizegoEngine::Font(L"font.ttf", fontsize, 255);
+    </div>
+    On Windows, the system fonts are located in <a href="C:/Windows/Fonts">C:\Windows\Fonts</a>.<br />
+    The range parameter, in this case 255, tells the constructor to load the characters from 0 to 255. There is full unicode support.
+    <br /><br />
+    Next, we can proceed to rendering text with the font.
+    <br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        renderer->Render(L"Text to render", font, GizegoEngine::vec2(x, y), GizegoEngine::Color(255, 255, 255));
+    </div>
+    x and y are coordinates where you want to render the font.<br />
+    The color parameter is optional.<br /><br />
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Particles:
+    </div>
+    <br />
+    Particles are the most complex renderable objects in the engine. There are also two ways of rendering them.<br />
+    Independent of the circumstances, we must instanciate a particle core. Don't forget to delete the pointer after the game loop.<br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::ParticleCore* core = new GizegoEngine::ParticleCore(image);
+        <br />//Particle from a non-finalized image.
+    </div>
+    or <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::ParticleCore* core = new GizegoEngine::ParticleCore(10, 10);
+        <br />//Particle that is a 10x10 square.
+    </div>
+    <br />
+    I am not going to cover the process of rendering particles individually using the <span>GizegoEngine::ParticleInstance</span> class.<br />
+    Particles can be rendered with the <span>GizegoEngine::ParticleInstanciator*</span>.<br />
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::ParticleInstanciator* instantiator = new GizegoEngine::ParticleInstanciator();
+    </div><br />
+    Then we must add a particle core.
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::ParticleCore* core = new GizegoEngine::ParticleCore(10, 10);
+    </div><br />
+    Before we can instanciate particles, we have to do other things first.<br />
+    Start by creting a void to handle particle updates:
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        void UpdateParticles(unsigned long long ellapsed, GizegoEngine::vec2* pos, GizegoEngine::vec2 initialposition, GizegoEngine::vecf* scale, GizegoEngine::Color* color) { }
+    </div>
+    <br />
+    This void will automatically be called in your game loop.<br />
+    ellapsed is the time ellapsed since the particle in milliseconds.<br />
+    initialposition is where the particle was instanced.
+    You can set the values of postion, scale and color of the particle by setting the value of the pointers.<br />
+    <br />
+    Now, lets instantiate a particle:
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        instantiator->InstantiateParticle(core, UpdateParticles, 5000, GizegoEngine::vec2(x, y));
+    </div>
+    We create a particle from the core, with our void as the update handler. In this case, 5000 is the lifetime of the particle, in milliseconds.<br />
+    Always replace x and y by the coordinates where you want to render the particle.
+    <br /><br />
+    In our game loop, we should insert the next lines between updating the window and swapping the buffers.
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        instantiator->Update();<br />
+        instantiator->Render();
+    </div>
+    <br />Try and paste the next snippet of code in your main.cpp and see the particles.
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        <pre>#include "include/GizegoEngine.h"
+
+        GizegoEngine::Window* window;
+        GizegoEngine::Renderer* renderer;
+        GizegoEngine::ParticleInstanciator* instantiator;
+        GizegoEngine::ParticleCore* core;
+
+        void ExceptionHandler(std::wstring str, GizegoEngine::ExceptionGravity gravity)
+        {
+            std::wcerr << str << std::endl;
+        }
+
+        void UpdateParticles(unsigned long long ellapsed, GizegoEngine::vec2* pos, GizegoEngine::vec2 initpos, GizegoEngine::vecf* scale, GizegoEngine::Color* color)
+        {
+            pos->x = 10 * sin(ellapsed / 50.0f) + initpos.x;
+            pos->y = initpos.y + (ellapsed / 8);
+            *color = GizegoEngine::Color(255, 255, 255);
+        }
+
+        int main()
+        {
+            GizegoEngine::InitializeEngine(ExceptionHandler);
+            window = new GizegoEngine::Window(GizegoEngine::Size(500, 500), L"GizegoEngine Demo");
+            renderer = window->Create(GizegoEngine::GLVersion(3, 0));
+            if (renderer == NULL)
+            {
+                std::wcin.get();
+                return -1;
+            }
+
+            instantiator = new GizegoEngine::ParticleInstanciator();
+            core = new GizegoEngine::ParticleCore(10, 10);
+            instantiator->InstantiateParticle(core, UpdateParticles, 5000, GizegoEngine::vec2(100, 200));
+            instantiator->InstantiateParticle(core, UpdateParticles, 5000, GizegoEngine::vec2(150, 200));
+            instantiator->InstantiateParticle(core, UpdateParticles, 5000, GizegoEngine::vec2(200, 200));
+
+            while (window->IsOpen())
+            {
+                window->Update();
+                instantiator->Update();
+                instantiator->Render();
+
+                window->SwapBuffers();
+            }
+
+            delete window;
+            delete instantiator;
+            delete core;
+            GizegoEngine::CloseEngine();
+        }</pre>
+    </div>
+    <br />
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Sprites:
+    </div><br />
+    We must start by creating after creating the window a sprite using:
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::Sprite* sprite = new GizegoEngine::Sprite({image1, image2, image3, image4, etc});
+    </div>
+    The parameter to the constructor is a std::vector of not finalized images. Do not use etc.<br /><br />
+    In our game loop we can render the sprite using
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        renderer->Render(sprite, GizegoEngine::vec2(x, y), GizegoEngine::vecf(1, 1), GizegoEngine::Color(255, 255, 255));
+    </div>
+    x and y are the coordinates where you wanto to render the sprite.<br />
+    The vecf parameter is the scale of the sprite<br />
+    The color of the sprite is going to work like light was affecting it.
+    <br /><br />
+    You have the function <span>sprite->SetAnimationState(unsigned int)</span>. That will control which image from the vector that you gave to to constructor will appear on your screen.
+    <br /><br />
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Multiple renderers:
+    </div><br />
+    In my engine, a renderer is equivalent to an OpenGL framebuffer. You can render things to second renderer only when you need to and then re-render them every frame. This will just improve
+    performance in situations with a lot of objects.
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+        GizegoEngine::Renderer* renderer2 = new GizegoEngine::Renderer(Size(width, height), false);<br />
+        //Render objects using renderer2
+    </div>
+    Do this between window creation and game loop.<br /><br/>
+    When you want to render the content of the second renderer to the window you can do this:
+    <div style="font-family:consolas;font-size:14px;font-weight: normal;background-color: rgb(200, 200, 200);">
+       renderer->Render(renderer2, color, vec2(x, y), vecf(1, 1));
+    </div>
+    color will affect the object renderer like it was the color of a light.
+    x and y are the coordinates where the contents of the 2nd renderer are going to be drawn.
+    The vecf parameter is the scale of the object.
+</body>
+</html>

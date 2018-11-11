@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<style>div.etitle {font-family:arial; font-size:30px; font-weight: bold; text-align: center; background-color: rgb(255, 0, 255); }</style>
+
+	<title>Gizego Engine</title>	
+	<head>
+	<div class="etitle">
+	Gizego Engine
+	</div>
+	<div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
+	Window class specification
+	</div>
+	</head>
+	<br />	
+	<body style="font-family:arial; font-size:14px; font-weight: normal;">
+	<div style="font-family:arial; font-size:18px; font-weight: bold;">
+	Funcion list in <span style="font-family: consolas">GizegoEngine::Window</span>:
+	</div>
+	<br/>
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	Window(GizegoEngine::Size size, std::wstring title)
+	</span>&ensp;
+	Creates a window with this parameters. To show for the first time it use Create().
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::Renderer* Create(GizegoEngine::GLVersion version = GizegoEngine::GLVersion(3, 0))
+	</span>&ensp;
+	Shows the window for the first time. Allways call after the constructor and never't delete the return value.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	bool IsOpen()
+	</span>&ensp;
+	Returns if the window is open or not.
+	</div>
+	</body>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Update()
+	</span>&ensp;
+	Call this every time in your game loop.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void SwapBuffers()
+	</span>&ensp;
+	Call this every time in your rendering loop.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::Size GetSize()
+	</span>&ensp;
+	Returns the client size of the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	std::wstring GetTitle()
+	</span>&ensp;
+	Returns the title of the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void SetTitle(std::wstring title)
+	</span>&ensp;
+	Sets the title of the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Close()
+	</span>&ensp;
+	Closes the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Hide()
+	</span>&ensp;
+	Hides the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Show()
+	</span>&ensp;
+	<span style="font-weight: bold;">NOT A REPLACEMENT FOR CREATE.</span> This will only show it after you hide it.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Maximize()
+	</span>&ensp;
+	Maximizes the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Minimize()
+	</span>&ensp;
+	Minimizes the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	bool IsMaximized()
+	</span>&ensp;
+	Checks if the window is maximized.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	bool IsMinimized()
+	</span>&ensp;
+	Checks if the window is minimized().
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void SetVSyncState(bool state)
+	</span>&ensp;
+	Turns VSync on or off.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	bool GetVSyncState()
+	</span>&ensp;
+	Gets the VSync state of the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void FullScreen(GizegoEngine::Display* display)
+	</span>&ensp;
+	Sets the window to windowed full screen mode and resizes it to fit the monitor's resolution.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void FullScreen(GizegoEngine::Display* display, GizegoEngine::Size size)
+	</span>&ensp;
+	Sets the window to windowed full screen mode but you can set its size.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void SetIcon(GizegoEngine::Image* icon)
+	</span>&ensp;
+	Sets the window's icon.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void Resize(GizegoEngine::Size size)
+	</span>&ensp;
+	Sets the client size of the window.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GLFWwindow* GetHandle()
+	</span>&ensp;
+	<span style="font-weight: bold;">DO NOT USE. </span>This is a GLFW thing and it's only public because other classes need it.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	static GizegoEngine::Window* GetMainWindow()
+	</span>&ensp;
+	The window class is supposed to be used as a singleton. This will return the only instance of it.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::vec2 GetWindowPosition()
+	</span>&ensp;
+	Gets the window position in the screen.
+	</div>
+	<br/>
+	
+	<div>
+	<span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void SetPosition(GizegoEngine::vec2 pos)
+	</span>&ensp;
+	Sets the cindow position in the screen.
+	</div>
+	<br/>
+</html>

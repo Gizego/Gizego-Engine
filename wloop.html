@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<style>div.etitle {font-family:arial; font-size:30px; font-weight: bold; text-align: center; background-color: rgb(255, 0, 255); }</style>
+	<title>Gizego Engine</title>	
+	<head>
+	<div class="etitle">
+	Documentation
+	</div>
+	<div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
+	Window and game loop tutorial
+	</div>
+	</head>	
+	<br />	
+	<body style="font-family:arial; font-size:14px; font-weight: normal;">
+	<div style="font-family:arial; font-size:18px; font-weight: bold;">
+	Creating the window:
+	</div>
+	<br/>
+	The first thing you should do before you start your application is <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">#include "include/GizegoEngine.h"</span>
+	<br/>
+	Create a function to handle exceptions.
+	<br/>
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	void ExceptionHandler(std::wstring exception, GizegoEngine::ExceptionGravity gravity) {
+	<br/>
+	}
+	</div>
+	<br/>
+	As the main focus of this game engine is liberty, you can handle exceptions the way you want.
+	Examples are logging them to the console, throwing std::exceptions or showing a message box.
+	The variable "gravity" can be GizegoEngine::ExceptionGravity::Error or GizegoEngine::ExceptionGravity::Warning.
+	Errors might stop your program from advancing and you should exit it if you get one. 
+	<br/></br>
+	The first thing to do in main is calling <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::InitializeEngine(ExceptionHandler /*the void you created*/)</span>
+	<br/><br/>
+	Then, you can create the window.
+	<br/>
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	unsigned int width = 500, height = 500;
+	</div>
+	<br/>
+	This will only allocate memory for the window and set the creation parameters.
+	<br/>
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::Window* window = new GizegoEngine::Window(GizegoEngine::Size(width, height), L"Window title");
+	</div>
+	Don't forget to delete the window at the end of your program.<br/>
+	<br/>
+	<span style="font-weight: bold;">THE WINDOW CLASS IS A SINGLETON. DO NOT CREATE MORE THAN ONE.</span>
+	This is the function that will actually create a context and show it.
+	<br/>
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::Renderer* renderer = window->Create();
+	</div>
+	I recommend you don't change the OpenGL version parameter. 3.0 is the minimum required.
+	Also, do not delete the renderer in the end of your program.
+	<br/><br/>
+	Now, we can move on to the game loop.
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	while (window->IsOpen()) {
+	<br/>
+    <span style="padding-left: 2em;">window->Update();</span>
+	<br/>
+    <span style="padding-left: 2em;"> window->SwapBuffers();</span>
+	<br/>
+	}
+	</div>
+	<br/>Then, after the game loop, the window can be deleted and the engine terminated.
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	delete window;<br/>
+	GizegoEngine::CloseEngine();
+	</div>
+	<br/>
+	If you want your game to be on fullscreen use this before your game loop:
+	<br/>
+	<div style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+	GizegoEngine::Display* display = new GizegoEngine::Display();
+	<br/>
+	window->FullScreen(display);
+	<br/>
+	delete display;
+	</div>
+	<br/>
+	<div style="font-family:arial; font-size:18px; font-weight: bold;">
+	You might be interested in:
+	</div>
+	<br/>
+	<a href="windowspec.html">Window specification</a>
+	</body>
+</html>

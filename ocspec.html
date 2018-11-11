@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<style>
+    div.etitle {
+        font-family: arial;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        background-color: rgb(255, 0, 255);
+    }
+</style>
+
+<title>Gizego Engine</title>
+<head>
+    <div class="etitle">
+        Documentation
+    </div>
+    <div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
+        Other classes and enums
+    </div>
+</head>
+<br/><br/>
+     <body style="font-family:arial; font-size:14px; font-weight: normal;">
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::ExceptionGravity
+             </span>&ensp;
+             Can be either an error or a warning. Used in your exception handling function. An error might stop your program from continuing.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::Color
+             </span>&ensp;
+             Represents an RGBA color. The <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">ToGL()</span> should not be used.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::vec2
+             </span>&ensp;
+             Component with x and y interger values. Used to represent positions.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::vecf
+             </span>&ensp;
+             Component with x and y float values. Used to represent scales.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::Size
+             </span>&ensp;
+             Component with width and height unsigned integer values. Used to represent sizes.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::GLVersion
+             </span>&ensp;
+             An OpenGL version. Constains a "Major" and "Minor" unsigned intergers. Used as parameter in <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">GizegoEngine::Window::Create()</span>.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::Display
+             </span>&ensp;
+             Represents your primary monitor. Is used on <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">GizegoEngine::Window::FullScreen()</span>.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::FileFormat
+             </span>&ensp;
+             Represents the format of the text in a text file. It can be <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">ANSIorUTF8</span>, <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">UTF8BOM</span>, <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">UCS2BIG</span> and <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">UCS2LITTLE</span>.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::AudioPlayingState
+             </span>&ensp;
+             Can be <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">Playing</span>, <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">Paused</span> or <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">Stopped</span>.
+         </div>
+         <br />
+
+         <div>
+             <span style="font-family:consolas; font-size:14px; font-weight: normal;background-color: rgb(200, 200, 200)">
+                 GizegoEngine::ImageFormat
+             </span>&ensp;
+             The file format of an image. Can be *.bmp, *.png, *.jpeg, *.tga
+         </div>
+         <br />
+     </body>
+</html>

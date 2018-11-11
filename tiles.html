@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<style>
+    div.etitle {
+        font-family: arial;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        background-color: rgb(255, 0, 255);
+    }
+
+    div.code {
+        font-family: consolas;
+        font-size: 14px;
+        font-weight: normal;
+        background-color: rgb(200, 200, 200);
+    }
+
+    span {
+        font-family: consolas;
+        font-size: 14px;
+        font-weight: normal;
+        background-color: rgb(200, 200, 200);
+    }
+</style>
+
+<title>Gizego Engine</title>
+<head>
+    <div class="etitle">
+        Documentation
+    </div>
+    <div style="font-family:arial; font-size:14px; font-weight: normal; text-align: center; background-color: rgb(255, 0, 255);">
+        Tile mapping
+    </div>
+</head>
+
+<body style="font-family:arial; font-size:14px; font-weight: normal;"><br/>
+    <div style="font-family:arial; font-size:18px; font-weight: bold;">
+        Tile mapping:
+    </div>
+    <br />
+    We must start by creating tiles. A tile is a 2D square that can have multiple images (animation states) that alternate in x milliseconds.
+    <br />
+    <div class="code">
+        GizegoEngine::Tile* tile = new Tile(image, hasalpha, hascollison); //A tile with 1 image<br />
+        GizegoEngine::Tile* tile2 = new Tile({image, image2, image3, etc...}, hasalpha, hascollison, animationinterval); //A tile with multiple images (std::vector), will be animated<br />
+    </div>
+    The images you give to the constructor must be not finalized. hasalpha is a boolean and means if the tile has transparency. As it's used for occlusion culling, if you are not sure use true but it will slightly affect performance.
+    hascollision if the tile collides with the player. animationinterval is the time that it takes to change the animated tile image.<br /><br />
+    Now, we have to pack every tile into a tile atlas.
+    <div class="code">
+        GizegoEngine::TileAtlas* atlas = new  GizegoEngine::TileAtlas(Size(width, height), tilesize);
+    </div>
+    width * height = maximum number of images in tiles before the atlas overflows<br />
+    tilesize is the width or the height of the tile. If the tile isn't a square the atlas will just bug.<br /><br />
+    <div class="code">
+        atlas->AddTile(tile);<br />
+        atlas->AddTile(tile2);<br />
+        atlas->Finalize();<br />
+    </div>
+    This will add the tiles to the atlas and convert it to an OpenGL texture.<br /><br />
+    Then, it's time to create a terrain. It can be created from a size or loaded from a file.
+    <div class="code">
+        GizegoEngine::Terrain* terrain = new GizegoEngine::Terrain(GizegoEngine::Size(width, height), layercount, lightcolor);
+    </div>
+    This will create a width*height terrain with layercount layers. lightcolor is the background color of the light map.<br /><br />
+    <div class="code">
+        terrain->SaveToFile(L"file.ter");<br/>
+        GizegoEngine::Terrain* terrain = new GizegoEngine::Terrain(L"file.ter", lightcolor);
+    </div>
+    The terrain won't save the lightmap. A terrain is a 3D array of unsigned integers(tile IDs). A tile ID is the number in the order it was added. First = 1, Second = 2, ...<br/><br/>
+    Before we can start rendering the terain, we must create a camera. A camera is just a position(position of the camera) and a size(the tiles that will be drawn).
+    <div class="code">
+        GizegoEngine::Camera* camera = new GizegoEngine::Camera();<br/>
+        camera->SetSize(GizegoEngine::Size(std::ceil(window->GetWidth() / tilesize), std::ceil(window->GetHeight() / tilesize)));
+    </div>
+    tilesize has to be replaced by the width/height of the tiles you are rendering.<br/><br/>
+    Now, we can render our terrain in the game loop using:
+    <div class="code">
+        renderer->Render(terrain, camera, atlas);
+    </div>
+</body>
+</html>
