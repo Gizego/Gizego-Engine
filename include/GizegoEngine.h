@@ -3705,12 +3705,18 @@ return T();
 		//Creates the window. This should only be executed once in your program after using the constructor with width, height and title. Don´t delete the renderer.
 		Renderer* Create(GLVersion version = GLVersion(3, 0))
 		{	
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, version.Major);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, version.Minor);
+
 			m_window = glfwCreateWindow(m_width, m_height, StringTools::ToString(m_title).c_str() , NULL, NULL);
 			glfwMakeContextCurrent(m_window);
 
+			if (!m_window)
+				return NULL;
+
 			if (!m_initialized)
 			{
-				if (!gladLoadGL())
+				if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 				{ 
 					ThrowException(L"GL version not supported");
 					return NULL;
