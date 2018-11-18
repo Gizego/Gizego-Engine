@@ -86,9 +86,9 @@ namespace GizegoEngine
 	class Color
 	{
 	public:
-		Color() {}
+		inline Color() {}
 		//Creates a color.
-		Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255) {
+		inline Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255) {
 			R = r;
 			G = g;
 			B = b;
@@ -101,7 +101,7 @@ namespace GizegoEngine
 			return new float[4]{ R / 255.0f, G / 255.0f, B / 255.0f, A / 255.0f };
 		}
 
-		~Color() {}
+		inline ~Color() {}
 
 		unsigned char R, G, B, A;
 	};
@@ -110,24 +110,24 @@ namespace GizegoEngine
 	struct vec2
 	{
 		int x, y;
-		vec2() { x = 0; y = 0; }
-		vec2(int x, int y) { this->x = x; this->y = y; }
+		inline vec2() { x = 0; y = 0; }
+		inline vec2(int x, int y) { this->x = x; this->y = y; }
 	
 	};
 	//Like a vec2 but with floats and used for object scaling
 	struct vecf
 	{
 		float x, y;
-		vecf() { x = 0; y = 0; }
-		vecf(float x, float y) { this->x = x; this->y = y; }
+		inline vecf() { x = 0; y = 0; }
+		inline vecf(float x, float y) { this->x = x; this->y = y; }
 	};
 
 	//A component with width and height.
 	struct Size
 	{
 		unsigned int width, height;
-		Size() { width = 0; height = 0; }
-		Size(unsigned int width, unsigned int height) { this->width = width; this->height = height; }
+		inline Size() { width = 0; height = 0; }
+		inline Size(unsigned int width, unsigned int height) { this->width = width; this->height = height; }
 	};
 
 	//The random number generator
@@ -194,8 +194,8 @@ namespace GizegoEngine
 			return -1;
 		}
 
-		//Returns the first index of a character in a string starting from int start. Returns -1 if the character is not found.
-		int FirstIndexOf(std::wstring& string, wchar_t ch, int start)
+		//Returns the first index of a character in a string starting from unsigned int start. Returns -1 if the character is not found.
+		int FirstIndexOf(std::wstring& string, wchar_t ch, unsigned int start)
 		{
 			for (unsigned int i = start; i < string.length(); ++i)
 			{
@@ -216,10 +216,10 @@ namespace GizegoEngine
 			return -1;
 		}
 
-		//Returns the first index of string tofind in a string starting from int start. Returns -1 if tofind is not found.
-		int FirstIndexOf(std::wstring& string, std::wstring tofind, int start)
+		//Returns the first index of string tofind in a string starting from unsigned int start. Returns -1 if tofind is not found.
+		int FirstIndexOf(std::wstring& string, std::wstring tofind, unsigned int start)
 		{
-			for (int i = start; i < string.length(); ++i)
+			for (unsigned int i = start; i < string.length(); ++i)
 			{
 				if (ComparePart(string, i, tofind))
 					return i;
@@ -230,7 +230,7 @@ namespace GizegoEngine
 		//Returns the last index of a character in a string. Returns -1 if the character is not found.
 		int LastIndexOf(std::wstring& string, wchar_t ch)
 		{
-			for (int i = string.length() - 1; i > -1; i--)
+			for (int i = string.length() - 1; i > -1; --i)
 			{
 				if (ch == string[i])
 					return i;
@@ -238,10 +238,10 @@ namespace GizegoEngine
 			return -1;
 		}
 
-		//Returns the last index of a character in a string starting from not the end of the string but int start . Returns -1 if the character is not found.
-		int LastIndexOf(std::wstring& string, wchar_t ch, int start)
+		//Returns the last index of a character in a string starting from not the end of the string but unsigned int start. Returns -1 if the character is not found.
+		int LastIndexOf(std::wstring& string, wchar_t ch, unsigned int start)
 		{
-			for (unsigned int i = start; i > -1; i--)
+			for (unsigned int i = start; i > -1; --i)
 			{
 				if (ch == string[i])
 					return i;
@@ -252,7 +252,7 @@ namespace GizegoEngine
 		//Returns the last index of string tofind in a string. Returns -1 if tofind is not found.
 		int LastIndexOf(std::wstring& string, std::wstring tofind)
 		{
-			for (size_t i = string.length() - 1; i > -1; i--)
+			for (size_t i = string.length() - 1; i > -1; --i)
 			{
 				if (ComparePart(string, i, tofind))
 					return i;
@@ -260,8 +260,8 @@ namespace GizegoEngine
 			return -1;
 		}
 
-		//Returns the last index of string tofind in a string startinf from int start. Returns -1 if tofind is not found.
-		int LastIndexOf(std::wstring& string, std::wstring tofind, int start)
+		//Returns the last index of string tofind in a string startinf from unsigned int start. Returns -1 if tofind is not found.
+		int LastIndexOf(std::wstring& string, std::wstring tofind, unsigned int start)
 		{
 			for (size_t i = start - 1; i > -1; i--)
 			{
@@ -319,14 +319,13 @@ namespace GizegoEngine
 		}
 
 		// Converts a wstring to a string
-		std::string ToString(std::wstring string)
+		inline std::string ToString(std::wstring string)
 		{
 			return std::string(string.begin(), string.end());
 		}
 
-		// Converts a string to a wstring. NEEDS WINDOWS .H
-		std::wstring ToWstring(std::string string)
-
+		// Converts a string to a wstring.
+		inline std::wstring ToWstring(std::string string)
 		{
 #ifdef _WINDOWS_
 			std::wstring ret(string.length(), L' ');
@@ -356,7 +355,7 @@ namespace GizegoEngine
 			FileFormat m_format;
 
 		public:
-			TextFile() {}
+			inline TextFile() {}
 			//Loads a file which text can be with TextFile::GetText(). Supports ANSI, UTF8, UTF8 BOM, UCS2, UCS2 BOM. Only supports accented characters in UCS2, UCS2 BOM and ANSI
 			TextFile(std::wstring filepath) {
 				std::wstring tmp;
@@ -372,7 +371,7 @@ namespace GizegoEngine
 				{
 					std::getline(stream, tmp);
 
-					for (unsigned int i = 0; i < tmp.size(); i++)
+					for (unsigned int i = 0; i < tmp.size(); ++i)
 						if (tmp[i] != 0)
 							m_text += tmp[i];
 
@@ -383,21 +382,21 @@ namespace GizegoEngine
 				if (m_text[0] == L'\xff' && m_text.c_str()[1] == L'\xfe')
 				{
 					//LITTLE ENDIAN
-					for (unsigned int i = 2; i < m_text.length(); i++)
+					for (unsigned int i = 2; i < m_text.length(); ++i)
 						m_text[i - 2] = m_text[i];
 					m_format = FileFormat::UCS2LITTLE;
 				}
 				else if (m_text[1] == L'\xff' && m_text[0] == L'\xfe')
 				{
 					// BIG ENDIAN
-					for (unsigned int i = 2; i < m_text.length(); i++)
+					for (unsigned int i = 2; i < m_text.length(); ++i)
 						m_text[i - 2] = m_text[i];
 					m_format = FileFormat::UCS2BIG;
 				}
 				else if (m_text[0] == L'\xef' && m_text[1] == L'\xbb' && m_text[2] == L'\xbf')
 				{
 					// UTF8 BOM
-					for (unsigned int i = 3; i < m_text.length(); i++)
+					for (unsigned int i = 3; i < m_text.length(); ++i)
 						m_text[i - 3] = m_text[i];
 					m_format = FileFormat::UTF8BOM;
 				}
@@ -457,8 +456,8 @@ namespace GizegoEngine
 		class BinaryFile
 		{
 		public:
-			BinaryFile() {}
-			~BinaryFile() {
+			inline BinaryFile() {}
+			inline ~BinaryFile() {
 				if (m_data)
 					delete[] m_data;
 			}
@@ -491,7 +490,7 @@ namespace GizegoEngine
 					ThrowException(L"Error saving binary file " + filepath);
 				else
 				{
-					for (unsigned int i = 0; i < data.size(); i++)
+					for (unsigned int i = 0; i < data.size(); ++i)
 						fputc(data[i], file);
 				}
 			}
@@ -640,8 +639,8 @@ namespace GizegoEngine
 	class Stopwatch
 	{
 	public:
-		Stopwatch() {}
-		~Stopwatch() {}
+		inline Stopwatch() {}
+		inline ~Stopwatch() {}
 
 		//Starts counting the time
 		inline void Start()
@@ -675,15 +674,15 @@ namespace GizegoEngine
 	class Timer
 	{
 	public:
-		Timer() {}
+		inline Timer() {}
 		//Creates the timer with an interval in milliseconds. Timers can be singlethreaded if you run Thread::UpdateAll() every frame in your game loop
-		Timer(unsigned int interval, void(*OnTick)())
+		inline Timer(unsigned int interval, void(*OnTick)())
 		{
 			m_interval = interval;
 			m_ontick = OnTick;
 		}
 
-		~Timer() {}
+		inline ~Timer() {}
 
 		//Starts the Timer
 		inline void Start()
@@ -699,7 +698,7 @@ namespace GizegoEngine
 		}
 
 		//Call this every frame
-		void Update()
+		inline void Update()
 		{
 			if (Time::TimeInMilliseconds() >= (m_last + m_interval))
 			{
@@ -719,7 +718,7 @@ namespace GizegoEngine
 	class GLVersion
 	{
 	public:
-		GLVersion() {}
+		inline GLVersion() {}
 		//Creates an OpenGL version.
 		inline GLVersion(unsigned int Major, unsigned int Minor)
 		{
@@ -826,7 +825,7 @@ namespace GizegoEngine
 			m_y = y;
 		}
 
-		~Display() {}
+		inline ~Display() {}
 
 		//Returns the width of a screen.
 		inline unsigned int GetWidth() { return m_width; }
@@ -852,7 +851,7 @@ namespace GizegoEngine
 		GLFWmonitor* m_monitor;
 	};
 
-	//Represents a windows DLL 
+	//Represents a windows DLL. UNTESTED.
 	class GameMod
 	{
 	public:
@@ -911,15 +910,15 @@ return T();
 		class KeyBind
 		{
 		public:
-			KeyBind() {}
+			inline KeyBind() {}
 			//Creates a new Keybind. Set key as GLFW_KEY_something
-			KeyBind(int Key)
+			inline KeyBind(int Key)
 			{
 				m_key = Key;
 				m_mouse = false;
 			}
 			//Creates a new Keybind. The mouse parameter sets if the key is a mouse button (GLFW_MOUSE_BUTTON_something, true) or a keyboard key(GLFW_KEY_something, false)
-			KeyBind(int key, bool mouse)
+			inline KeyBind(int key, bool mouse)
 			{
 				m_key = key;
 				m_mouse = mouse;
@@ -938,7 +937,7 @@ return T();
 			}
 
 			//Returns the name of the key. The names are from an US keyboard.
-			inline std::wstring GetKeyName()
+			std::wstring GetKeyName()
 			{
 				if (!m_mouse)
 				{
@@ -1165,14 +1164,14 @@ return T();
 		}
 
 		//DO NOT USE.
-		void Finalize()
+		inline void Finalize()
 		{
 			alcDestroyContext(m_context);
 			alcCloseDevice(m_device);
 		}
 
 		//DO NOT USE.
-		bool isBigEndian()
+		inline bool isBigEndian()
 		{
 			int a = 1;
 			return !((char*)&a)[0];
@@ -1263,7 +1262,7 @@ return T();
 	class AudioSample
 	{
 	public:
-		AudioSample() { m_buffer = 0; }
+		inline AudioSample() { m_buffer = 0; }
 		//Creates an audio from a WAV file.
 		AudioSample(std::wstring filepath)
 		{
@@ -1297,7 +1296,7 @@ return T();
 			return m_channels;
 		}
 
-		~AudioSample()
+		inline ~AudioSample()
 		{
 			if (m_buffer)
 				alDeleteBuffers(1, &m_buffer);
@@ -1428,7 +1427,7 @@ return T();
 		}
 
 		//Fades the audio from the current volume to the desired one during a set period of time
-		void Fade(unsigned char volume, unsigned long long milliseconds)
+		inline void Fade(unsigned char volume, unsigned long long milliseconds)
 		{
 				m_dif = (volume - m_volume);
 				m_interval = (unsigned long long) (milliseconds / std::abs(m_dif));
@@ -1491,18 +1490,18 @@ return T();
 	class AudioEntity
 	{
 	public:
-		AudioEntity()
+		inline AudioEntity()
 		{
 			m_source = new AudioSource();
 		}
 
-		void PlaySample(AudioSample* sample)
+		inline void PlaySample(AudioSample* sample)
 		{
 			m_source->PlaySample(sample);
 		}
 
 		//Sets the position and the range of the audio-emmiting entity. Range is the radius of the circumference.
-		void SetParameters(vec2 pos, unsigned int range)
+		inline void SetParameters(vec2 pos, unsigned int range)
 		{
 			m_x = pos.x;
 			m_y = pos.y;
@@ -1533,7 +1532,7 @@ return T();
 			}
 		}
 
-		~AudioEntity()
+		inline ~AudioEntity()
 		{
 			delete m_source;
 		}
@@ -1547,7 +1546,7 @@ return T();
 		AudioSource* m_source;
 		int m_x, m_y, m_range;
 
-		double MeasureDistance(unsigned int x, unsigned int y)
+		inline double MeasureDistance(unsigned int x, unsigned int y)
 		{
 			return sqrt(pow(abs((double)m_x - x), 2) + pow(abs((double)m_y - y), 2));
 		}
@@ -1557,11 +1556,11 @@ return T();
 	class ShaderVariable
 	{
 	public:
-		ShaderVariable(unsigned int VAOindex, std::string name) {
+		inline ShaderVariable(unsigned int VAOindex, std::string name) {
 			m_VAOindex = VAOindex;
 			m_name = name;
 		}
-		~ShaderVariable() {}
+		inline ~ShaderVariable() {}
 
 		inline unsigned int GetIndex() { return m_VAOindex; }
 		inline const char* GetName() { return m_name.c_str(); }
@@ -1574,8 +1573,8 @@ return T();
 	class Shader
 	{
 	public:
-		Shader() {}
-		~Shader() 
+		inline Shader() {}
+		inline ~Shader()
 		{
 			if (m_id)
 				glDeleteProgram(m_id);
@@ -1585,7 +1584,7 @@ return T();
 				glDeleteShader(m_fid);
 		}
 
-		void Create(std::string vertex_shader, std::string fragment_shader, std::vector<ShaderVariable> variables, void(*uniforms)(int))
+		inline void Create(std::string vertex_shader, std::string fragment_shader, std::vector<ShaderVariable> variables, void(*uniforms)(int))
 		{
 			m_vid = Compile(vertex_shader.c_str(), GL_VERTEX_SHADER);
 			m_fid = Compile(fragment_shader.c_str(), GL_FRAGMENT_SHADER);
@@ -1593,7 +1592,7 @@ return T();
 			glAttachShader(m_id, m_vid);
 			glAttachShader(m_id, m_fid);
 
-			for (unsigned int i = 0; i < variables.size(); i++)
+			for (unsigned int i = 0; i < variables.size(); ++i)
 				glBindAttribLocation(m_id, variables[i].GetIndex(), variables[i].GetName());
 
 			glLinkProgram(m_id);
@@ -1637,7 +1636,7 @@ return T();
 			
 		}
 
-		~TextureShader() {}
+		inline ~TextureShader() {}
 
 		inline void SetMatrix(float* matrix)
 		{
@@ -1767,10 +1766,10 @@ return T();
 	class Image
 	{
 	public:
-		Image() {}
+		inline Image() {}
 
 		//Creates a new image with a width, a height.
-		Image(Size size)
+		inline Image(Size size)
 		{
 			m_width = size.width;
 			m_height = size.height;
@@ -2002,7 +2001,7 @@ return T();
 		FillTriangles, Lines
 	};
 
-	//A 2D mesh
+	//A 2D mesh. //#TODO - Textures
 	class GeometryMesh
 	{
 	public:
@@ -2099,7 +2098,7 @@ return T();
 			}
 		};
 	public:
-		Font() {}
+		inline Font() {}
 		//Only call this constructor after Window::Create().
 		Font(std::wstring filepath, unsigned int size, int range)
 		{
@@ -2260,10 +2259,10 @@ return T();
 	class ParticleCore
 	{
 	public:
-		ParticleCore() {}
+		inline ParticleCore() {}
 
 		//Only call after Window::Create
-		ParticleCore(Image* img) 
+		inline ParticleCore(Image* img)
 		{
 			m_textured = true;
 			CreateBuffers(img->GetWidth(), img->GetHeight());
@@ -2271,7 +2270,7 @@ return T();
 		}
 
 		//Only call after Window::Create
-		ParticleCore(unsigned int width, unsigned int height) 
+		inline ParticleCore(unsigned int width, unsigned int height)
 		{
 			m_textured = false;
 			CreateBuffers(width, height);
@@ -2366,10 +2365,10 @@ return T();
 	class ParticleInstance
 	{
 	public:
-		ParticleInstance() {}
+		inline ParticleInstance() {}
 
 		//Creates a particle. lifetime is in milliseconds.
-		ParticleInstance(void(*Update)(unsigned long long ellapsed, vec2* pos, vec2 initpos, vecf* scale, Color* color), unsigned long long lifetime, vec2 position)
+		inline ParticleInstance(void(*Update)(unsigned long long ellapsed, vec2* pos, vec2 initpos, vecf* scale, Color* color), unsigned long long lifetime, vec2 position)
 		{
 			m_upd = Update;
 			m_lifetime = lifetime;
@@ -2377,7 +2376,7 @@ return T();
 			m_ivec = position;
 			m_vec = vec2();
 		}
-		~ParticleInstance() {}
+		inline ~ParticleInstance() {}
 
 		//DO NOT USE if you are using ParticleInstancing. It will return true if the particle gets destroyed.
 		bool Update()
@@ -2392,7 +2391,7 @@ return T();
 		}			
 
 		//DO NOT USE.
-		void Render()
+		inline void Render()
 		{
 			Shaders::ts->SetPosition(m_vec);
 			Shaders::ts->SetScale(m_scale);
@@ -2411,11 +2410,11 @@ return T();
 	class ParticleInstanciator
 	{
 	public:
-		ParticleInstanciator() {}
-		~ParticleInstanciator() { Clear(); }
+		inline ParticleInstanciator() {}
+		inline ~ParticleInstanciator() { Clear(); }
 
 		//Instances a particle.
-		void InstantiateParticle(ParticleCore* core, void(*Update)(unsigned long long ellapsed, vec2* pos, vec2 initpos, vecf* scale, Color* color), unsigned long long lifetime, vec2 position)
+		inline void InstantiateParticle(ParticleCore* core, void(*Update)(unsigned long long ellapsed, vec2* pos, vec2 initpos, vecf* scale, Color* color), unsigned long long lifetime, vec2 position)
 		{
 			m_cores.push_back(core);
 			m_instances.push_back(new ParticleInstance(Update, lifetime, position));
@@ -2423,7 +2422,7 @@ return T();
 		}
 
 		//Call every frame
-		void Update()
+		inline void Update()
 		{
 			for (int i = 0; i < m_instances.size(); i++)
 				if (m_canrender[i])
@@ -2445,7 +2444,7 @@ return T();
 		}
 
 		//Removes all particles from the list.
-		void Clear()
+		inline void Clear()
 		{
 			for (int i = 0; i < m_cores.size(); i++)
 				delete m_instances[i];
@@ -2464,11 +2463,11 @@ return T();
 	class SpriteAtlas
 	{
 	public:
-		SpriteAtlas(Size size) 
+		inline SpriteAtlas(Size size)
 		{
 			m_atlas = new Image(size);
 		}
-		~SpriteAtlas() {
+		inline ~SpriteAtlas() {
 			delete m_atlas;
 		}
 
@@ -2509,7 +2508,7 @@ return T();
 	class Sprite
 	{
 	public:
-		Sprite() {}
+		inline Sprite() {}
 		//All images must be the same size. Different size images will bug when rendered. Only call after Window::Create().
 		Sprite(std::vector<Image*> img) 
 		{
@@ -2609,7 +2608,7 @@ return T();
 	class Tile
 	{
 	public:
-		Tile() {}
+		inline Tile() {}
 
 		//Creates an unanimated tile from an image;
 		inline Tile(Image* image, bool hasalpha, bool hascollision)
@@ -2685,7 +2684,7 @@ return T();
 		}
 
 		//DO NOT USE. This is called when rendering a terrain.
-		void Render(unsigned int x, unsigned int y)
+		inline void Render(unsigned int x, unsigned int y)
 		{			
 			Shaders::ts->SetPosition(vec2(x, y));	
 			Bind(m_animstate);
@@ -2721,7 +2720,7 @@ return T();
 			return m_col;
 		}
 
-		~Tile() {
+		inline ~Tile() {
 			glDeleteVertexArrays(m_vao.size(), m_vao.data());
 			glDeleteBuffers(m_tbo.size(), m_tbo.data());
 		}
@@ -2890,14 +2889,14 @@ return T();
 	class Camera
 	{
 	public:
-		Camera() 
+		inline Camera()
 		{
 			m_x = 0;
 			m_y = 0;
 			m_width = 0;
 			m_height = 0;
 		}
-		~Camera() {}
+		inline ~Camera() {}
 
 		//Sets the size of the camera grid.
 		inline void SetSize(Size size)
@@ -2960,7 +2959,7 @@ return T();
 		};
 
 	public:
-		LightMap() {}
+		inline LightMap() {}
 
 		//DO NOT USE. This is integrated in the terrain class.
 		LightMap(Size size, Color color) 
@@ -3058,7 +3057,7 @@ return T();
 	class Terrain
 	{
 	public:
-		Terrain() {}
+		inline Terrain() {}
 		Terrain(Size size, unsigned int layers = 1, Color LightmapBackcolor = Color(255, 255, 255))
 		{
 			m_light = new LightMap(size, LightmapBackcolor);
@@ -3252,8 +3251,8 @@ return T();
 	class TilemapEntity
 	{
 	public:
-		TilemapEntity() {}
-		TilemapEntity(unsigned int width, unsigned int height) 
+		inline TilemapEntity() {}
+		inline TilemapEntity(unsigned int width, unsigned int height)
 		{
 			m_width = width;
 			m_height = height;
@@ -3394,7 +3393,6 @@ return T();
 		//Call this every frame.
 		virtual void Update() = 0;
 
-
 		//Sets the component poition.
 		inline void SetPosition(vec2 pos)
 		{
@@ -3415,7 +3413,7 @@ return T();
 	class Renderer
 	{
 	public:
-		Renderer() {}
+		inline Renderer() {}
 		//Only call after Window::Create()
 		Renderer(Size size, bool IsWindow)
 		{
@@ -3546,11 +3544,12 @@ return T();
 			int end_x = std::floor(start_x / (double) size) + cam->GetWidth() + 1;
 			int end_y = std::floor(start_y / (double)size) + cam->GetHeight() + 1;
 
-			for (int x = std::floor(start_x / (double)size) - 1; x < end_x ; x++)
+			for (int x = std::floor(start_x / (double)size) - 1; x < end_x ; ++x)
 			{
-				for (int y = std::floor(start_y / (double)size) - 1; y < end_y; y++)
+				for (int y = std::floor(start_y / (double)size) - 1; y < end_y; ++y)
 				{
-					for (int l = 0; l < ter->GetLayerCount(); l++)
+					//#TODO - check ++i
+					for (int l = 0; l < ter->GetLayerCount(); ++l)
 					{
 						
 						unsigned int val;
@@ -3685,7 +3684,7 @@ return T();
 	class Window
 	{
 	public:
-		Window() { m_window = NULL; }
+		inline Window() { m_window = NULL; }
 		~Window() 
 		{
 			if (m_window)
@@ -3696,7 +3695,7 @@ return T();
 				delete m_renderer;
 		}
 		//Creates a window with this parameters. To show for the first time it use Create().
-		Window(Size size, std::wstring title) {
+		inline Window(Size size, std::wstring title) {
 			m_width = size.width;
 			m_height = size.height;
 			m_title = title;
@@ -4086,10 +4085,10 @@ return T();
 	class Cursor
 	{
 	public:
-		Cursor() {}
+		inline Cursor() {}
 
 		//Creates a cursor from an image.
-		Cursor(Image* img)
+		inline Cursor(Image* img)
 		{
 			GLFWimage image;
 			image.width = img->GetWidth();
@@ -4099,7 +4098,7 @@ return T();
 		}
 
 		//Creates a system cursor
-		Cursor(CursorType type)
+		inline Cursor(CursorType type)
 		{
 			m_cursor = glfwCreateStandardCursor(type);
 		}
@@ -4122,7 +4121,7 @@ return T();
 			glfwSetCursor(Window::GetMainWindow()->GetHandle(), m_cursor);
 		}
 
-		~Cursor() 
+		inline ~Cursor()
 		{
 			if (m_cursor)
 				glfwDestroyCursor(m_cursor);
@@ -4136,7 +4135,7 @@ return T();
 	class Button : public UIElement
 	{
 	public:
-		Button() {}
+		inline Button() {}
 
 		//Creates a button. Deletefont will dictate if the font pointer will be deleted in the deconstructor.
 		Button(Font* font, Color fontcolor, Color backcolor,std::wstring text, bool deletefont)
@@ -4204,9 +4203,9 @@ return T();
 	class Label : public UIElement
 	{
 	public:
-		Label() {}
+		inline Label() {}
 
-		Label(Font* font, Color fontcolor, std::wstring text, bool deletefont)
+		inline Label(Font* font, Color fontcolor, std::wstring text, bool deletefont)
 		{
 			m_font = font;
 			m_deletefont = deletefont;
@@ -4215,7 +4214,7 @@ return T();
 			SetPosition(vec2());
 		}
 
-		~Label() {
+		inline ~Label() {
 			if (m_deletefont && m_font)
 				delete m_font;
 		}
@@ -4254,17 +4253,17 @@ return T();
 	class PictureBox : public UIElement
 	{
 	public:
-		PictureBox() {}
+		inline PictureBox() {}
 
 		//The image you throw in this function must be finalized. deleteimage dictates if the image is deleted when this UI compenent is deleted.
-		PictureBox(Image* image, bool deleteimage)
+		inline PictureBox(Image* image, bool deleteimage)
 		{
 			m_img = image;
 			m_deleteimage = deleteimage;
 			SetPosition(vec2());
 		}
 
-		~PictureBox() {
+		inline ~PictureBox() {
 			if (m_deleteimage)
 				delete m_img;
 		}
@@ -4294,9 +4293,9 @@ return T();
 	class ProgressBar : public UIElement
 	{
 	public:
-		ProgressBar() {}
+		inline ProgressBar() {}
 
-		ProgressBar(unsigned int width, unsigned int height, Color backcolor, Color progresscolor) 
+		ProgressBar(unsigned int width, unsigned int height, Color backcolor, Color progresscolor)
 		{
 			m_width = width;
 			m_height = height;
@@ -4318,7 +4317,7 @@ return T();
 			SetPosition(vec2());
 		}
 
-		~ProgressBar() 
+		inline ~ProgressBar()
 		{
 			if (m_back)
 				delete m_back;
@@ -4367,7 +4366,7 @@ return T();
 	class CheckBox : public UIElement
 	{
 	public:
-		CheckBox() {}
+		inline CheckBox() {}
 		CheckBox(Font* font, Color fontcolor, std::wstring text, bool deletefont)
 		{
 			m_deletefont = deletefont;
@@ -4438,7 +4437,7 @@ return T();
 			return false;
 		}
 
-		~CheckBox() 
+		inline ~CheckBox()
 		{
 			if (m_deletefont)
 				delete m_font;
@@ -4457,14 +4456,14 @@ return T();
 	class NumberMarking
 	{
 	public:
-		NumberMarking() {}
-		NumberMarking(double value, unsigned int height, bool showvalue) 
+		inline NumberMarking() {}
+		inline NumberMarking(double value, unsigned int height, bool showvalue)
 		{
 			m_value = value;
 			m_height = height;
 			m_write = showvalue;
 		}
-		~NumberMarking() {}
+		inline ~NumberMarking() {}
 	
 		//DO NOT USE.
 		double m_value;
@@ -4478,7 +4477,7 @@ return T();
 	class NumberSlider : public UIElement
 	{
 	public:
-		NumberSlider() {}
+		inline NumberSlider() {}
 
 		NumberSlider(Color linecolor, Color cursorcolor, std::vector<NumberMarking> markings, Font* font, bool deletefont, unsigned int width, double minvalue, double maxvalue, double startval, bool cliptomarkings) 
 		{
@@ -4646,8 +4645,8 @@ return T();
 	class RadioButton : public UIElement
 	{
 	public:
-		RadioButton() {}
-		RadioButton(Font* font, Color textcolor, bool deletefont, std::wstring text, unsigned int circledetail = 32) 
+		inline RadioButton() {}
+		inline RadioButton(Font* font, Color textcolor, bool deletefont, std::wstring text, unsigned int circledetail = 32)
 		{
 			m_font = font;
 			m_deletefont = deletefont;
@@ -4657,7 +4656,7 @@ return T();
 
 			m_circle = new GeometryMesh(circledetail, font->GetMMax() / 2);
 		}
-		~RadioButton() 
+		inline ~RadioButton()
 		{
 			delete m_circle;
 			if (m_deletefont)
@@ -4746,7 +4745,7 @@ return T();
 	class Textbox : public UIElement
 	{
 	public:
-		Textbox() {}
+		inline Textbox() {}
 
 		Textbox(Font* font, Color backcolor, Color fontcolor, bool deletefont, unsigned int width)
 		{
@@ -4902,7 +4901,7 @@ return T();
 	class ComboBox : public UIElement
 	{
 	public:
-		ComboBox() {}
+		inline ComboBox() {}
 		ComboBox(Font* font, Color backcolor, Color fontcolor, Color clickcolor, bool deletefont, unsigned int width)
 		{
 			SetPosition(vec2());
