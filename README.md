@@ -16,6 +16,6 @@
 
     
   For more information and a usage guide please visit my website at: 
-  https://humberto-gomes.github.io/Gizego-Engine/
+  https://gizego.github.io/Gizego-Engine/
  
 Bug reporting can be done in the "Issues" tab
